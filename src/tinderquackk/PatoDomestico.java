@@ -2,7 +2,7 @@ package tinderquackk;
 
 import java.util.Scanner;
 
-public class PatoDomestico  extends Pato{
+class PatoDomestico  extends Pato{
 	    private String raca;
 
 	    public void setRaca(String raca) { this.raca = raca; }

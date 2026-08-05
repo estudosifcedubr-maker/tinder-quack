@@ -2,7 +2,7 @@ package tinderquackk;
 
 import java.util.Scanner;
 
-public class PatoSelvagem extends Pato {
+class PatoSelvagem extends Pato {
 	private String regiaoOrigem;
 	
 	 public void setRegiaoOrigem(String regiaoOrigem) { this.regiaoOrigem = regiaoOrigem; }

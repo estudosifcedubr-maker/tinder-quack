@@ -66,4 +66,16 @@ public class Perfil {
         System.out.print("Novo Nome de Usuário: ");
         this.nomeDoUsuario = entrada.nextLine();
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
