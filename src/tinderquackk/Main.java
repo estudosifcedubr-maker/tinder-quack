@@ -18,11 +18,13 @@ public class Main {
             System.out.println("4 - Atualizar Pato");
             System.out.println("5 - Deletar Pato");
             System.out.println("6 - Sair");
+            System.out.println("7 - Curtir outro Pato");
+            System.out.println("8 - Enviar Mensagem");
             System.out.print("Escolha: ");
             
             try {
                 opcao = entrada.nextInt();
-                entrada.nextLine(); // Limpa o buffer do Enter
+                entrada.nextLine(); 
 
                 switch (opcao) {
                     case 1:
@@ -43,8 +45,14 @@ public class Main {
                     case 6:
                         System.out.println("Encerrando sistema...");
                         break;
+                    case 7:
+                        curtirPato(entrada); 
+                        break;
+                    case 8:
+                        enviarMensagem(entrada); 
+                        break;
                     default:
-                        System.out.println("Opção inválida. Digite um número de 1 a 6.");
+                        System.out.println("Opção inválida. Digite um número de 1 a 8.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("ERRO: Você digitou uma letra ou caractere inválido. Digite apenas números.");
@@ -132,6 +140,40 @@ public class Main {
         } catch (InputMismatchException e) {
             System.out.println("ERRO: ID deve ser um número inteiro.");
             entrada.nextLine(); 
+        }
+    }
+
+    private static void curtirPato(Scanner entrada) {
+        try {
+            System.out.print("Digite o ID do pato que está CURTINDO: ");
+            int idCurtidor = entrada.nextInt();
+            System.out.print("Digite o ID do pato que será CURTIDO: ");
+            int idCurtido = entrada.nextInt();
+            
+            service.curtirPato(idCurtidor, idCurtido);
+        } catch (InputMismatchException e) {
+            System.out.println("ERRO: Digite apenas números para os IDs.");
+            entrada.nextLine();
+        }
+    }
+
+    private static void enviarMensagem(Scanner entrada) {
+        try {
+            System.out.print("Digite o ID do REMETENTE: ");
+            int idRemetente = entrada.nextInt();
+            entrada.nextLine(); 
+            
+            System.out.print("Digite o ID do DESTINATÁRIO: ");
+            int idDestinatario = entrada.nextInt();
+            entrada.nextLine(); 
+
+            System.out.print("Digite a mensagem: ");
+            String texto = entrada.nextLine();
+
+            service.enviarMensagem(idRemetente, idDestinatario, texto);
+        } catch (InputMismatchException e) {
+            System.out.println("ERRO: Digite apenas números para os IDs.");
+            entrada.nextLine();
         }
     }
 }

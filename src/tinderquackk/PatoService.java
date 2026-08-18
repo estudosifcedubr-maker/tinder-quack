@@ -29,6 +29,8 @@ public class PatoService {
         }
     }
 
+    private ArrayList<String> historicoCurtidas = new ArrayList<>();
+
     public Pato buscarPatoPorId(int id) {
         for (Pato p : listaPatos) {
             if (p.getIdPato() == id) {
@@ -56,6 +58,53 @@ public class PatoService {
             System.out.println(">>> Pato ID " + id + " removido do sistema.");
         } else {
             System.out.println("Erro: Pato com ID " + id + " não encontrado.");
+        }
+    }
+    
+    public void curtirPato(int idQuemCurtiu, int idCurtido) {
+        Pato curtidor = buscarPatoPorId(idQuemCurtiu);
+        Pato curtido = buscarPatoPorId(idCurtido);
+
+        if (curtidor != null && curtido != null) {
+            if (idQuemCurtiu == idCurtido) {
+                System.out.println("Você não pode curtir a si mesmo!");
+            } else {
+                String chaveCurtida = idQuemCurtiu + "-" + idCurtido;
+                if (historicoCurtidas.contains(chaveCurtida)) {
+                    System.out.println("Você já curtiu esse pato anteriormente.");
+                } else {
+                    historicoCurtidas.add(chaveCurtida);                    
+                    System.out.println("\n>>> " + curtidor.getNome() + " curtiu " + curtido.getNome() + "!");            
+                    String chaveInversa = idCurtido + "-" + idQuemCurtiu;
+                    if (historicoCurtidas.contains(chaveInversa)) {
+                        System.out.println("💖💖💖 É UM MATCH! 💖💖💖");
+                        System.out.println(curtidor.getNome() + " e " + curtido.getNome() + " se curtiram mutuamente!");
+                    } else {
+                        System.out.println("Aguardando " + curtido.getNome() + " te curtir de volta...");
+                    }
+                }
+            }
+        } else {
+            System.out.println("Erro: Um dos patos não foi encontrado.");
+        }
+    }
+
+    public void enviarMensagem(int idRemetente, int idDestinatario, String texto) {
+        Pato remetente = buscarPatoPorId(idRemetente);
+        Pato destinatario = buscarPatoPorId(idDestinatario);
+
+        if (remetente != null && destinatario != null) {
+            if (idRemetente == idDestinatario) {
+                System.out.println("Você não pode enviar mensagem para si mesmo!");
+            } else {
+                System.out.println("\n--- MENSAGEM ENVIADA ---");
+                System.out.println("De: " + remetente.getNome());
+                System.out.println("Para: " + destinatario.getNome());
+                System.out.println("Conteúdo: \"" + texto + "\"");
+                System.out.println("------------------------");
+            }
+        } else {
+            System.out.println("Erro: Um dos patos não foi encontrado.");
         }
     }
 }
